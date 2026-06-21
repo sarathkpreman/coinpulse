@@ -1,6 +1,9 @@
 
 import { useEffect, useState } from "react";
 import { fetchCoin } from "../api/coingecko";
+import { CryptoCard } from "../components/crypto/CryptoCard";
+import { Spinner } from "../components/ui/Spinner"
+import { ErrorCard } from "../components/ui/ErrorCard"
 
 export const Home = () => {
   const [cryptoList, setCryptoList] = useState([]);
@@ -12,9 +15,9 @@ export const Home = () => {
       try {
         const data = await fetchCoin();
         setCryptoList(data);
-      } catch (error) {
-        console.error("Error while fetching coin data:", error);
-        setError(error.message || "Failed to fetch data");
+      } catch (err) {
+        console.error("Error while fetching coin data:", err);
+        setError(err.message || "Failed to fetch data");
       } finally {
         setIsLoading(false);
       }
@@ -23,27 +26,16 @@ export const Home = () => {
     fetchCoinData();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if(isLoading) return <Spinner />
+
+  if(error) return <ErrorCard />
 
   return (
     <div className="app">
-      {cryptoList.length > 0 ? (
-        <ul>
-          {cryptoList.map((coin) => (
-            <li key={coin.id}>
-              {coin.name} - ${coin.current_price}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>No data available.</div>
-      )}
+      {cryptoList.map((crypto, key)=> (
+        <CryptoCard key={key} data={crypto}/>
+      ))}
     </div>
   );
 };
