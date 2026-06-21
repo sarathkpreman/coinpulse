@@ -11,11 +11,13 @@ export const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchCoinData = async () => {
       try {
-        const data = await fetchCoin();
+        const data = await fetchCoin(controller.signal);
         setCryptoList(data);
       } catch (err) {
+        if(err.name === "AbortError") return; 
         console.error("Error while fetching coin data:", err);
         setError(err.message || "Failed to fetch data");
       } finally {
@@ -24,6 +26,7 @@ export const Home = () => {
     };
 
     fetchCoinData();
+    return () => controller.abort();
   }, []);
 
 
