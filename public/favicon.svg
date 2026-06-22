@@ -1,0 +1,37 @@
+<svg
+  width="512"
+  height="512"
+  viewBox="0 0 512 512"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF79B4"/>
+      <stop offset="100%" stop-color="#E05593"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square matching ResuMax style ~rx=115 -->
+  <rect x="0" y="0" width="512" height="512" rx="115" fill="#0F0E15"/>
+
+  <circle
+    cx="256"
+    cy="256"
+    r="130"
+    stroke="url(#pg)"
+    stroke-width="36"
+  />
+
+  <path
+    d="M110 270 H185 L225 195 L270 335 L318 155 L365 270 H402"
+    stroke="url(#pg)"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <circle cx="110" cy="270" r="18" fill="#FF79B4"/>
+  <circle cx="402" cy="270" r="18" fill="#FF79B4"/>
+</svg>

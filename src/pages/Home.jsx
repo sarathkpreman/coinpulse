@@ -9,6 +9,7 @@ export const Home = () => {
   const [cryptoList, setCryptoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [viewMode, setViewMode] = useState("grid")
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,9 +37,19 @@ export const Home = () => {
 
   return (
     <div className="app">
-      {cryptoList.map((crypto, key)=> (
+      <div className="controls">
+        <div className="filter-group">
+          <div className="">
+            <button className={viewMode === "grid"  ? "active": ""} onClick={()=> setViewMode("grid")}>Grid</button>
+            <button className={viewMode === "list"  ? "active": ""} onClick={()=> setViewMode("list")}>List</button>
+          </div>
+        </div>
+      </div>
+      <div className={`crypto-container ${viewMode}`}>
+        {cryptoList.map((crypto, key)=> (
         <CryptoCard key={key} data={crypto}/>
       ))}
+      </div>
     </div>
   );
 };
