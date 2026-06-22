@@ -1,0 +1,339 @@
+
+:root {
+  --bg: #08070b;
+  --surface: #0f0e15;
+  --surface-card: rgba(15, 14, 21, 0.6);
+  --surface-hover: rgba(22, 20, 31, 0.8);
+
+  /* Typography Colors */
+  --text: #ffffff;
+  --text-secondary: #94929c;
+  --text-muted: #5c5a65;
+
+  /* Resumax Signature Accent (Hot Pink) */
+  --primary: #ff79b4;
+  --primary-hover: #e05593;
+  --primary-glow: rgba(255, 121, 180, 0.15);
+
+  /* Feedback Colors */
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.08);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.08);
+
+  /* Borders & Gradients */
+  --border: rgba(255, 255, 255, 0.05);
+  --border-hover: rgba(255, 121, 180, 0.3);
+
+  /* Structural Tokens */
+  --radius-sm: 8px;
+  --radius-md: 20px; 
+  --radius-lg: 30px;
+  
+  --shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.8);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset / Core Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  /* Ambient grid background simulation using subtle radial gradients */
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(255, 121, 180, 0.06), transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px;
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+/* Controls / View Switcher Container */
+.controlls, .controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.filter-group {
+  background: var(--surface);
+  padding: 6px;
+  border-radius: 999px; 
+  border: 1px solid var(--border);
+}
+
+.filter-group div {
+  display: flex;
+  gap: 4px;
+}
+
+.filter-group button {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-group button:hover {
+  color: var(--text);
+}
+
+.filter-group button.active {
+  background: var(--primary);
+  color: var(--bg); 
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(255, 121, 180, 0.3);
+}
+
+/* --- Layout Modes --- */
+
+/* 1. Grid View configuration */
+.crypto-container.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* 2. List View configuration */
+.crypto-container.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --- Resumax Cryptocard --- */
+.crypto-card {
+  position: relative;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.crypto-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.9), 
+    0 0 30px rgba(255, 121, 180, 0.04);
+}
+
+/* Card Header Configuration */
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.crypto-info {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.crypto-info img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.crypto-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.crypto-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.symbol {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.rank {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Price Section */
+.crypto-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.change.positive {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.change.negative {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Unified Multi-row Stats Grid Layout */
+.crypto-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: auto; 
+}
+
+/* Prevents broken vertical spacing with duplicate React wrapper tags */
+.crypto-stats + .crypto-stats {
+  margin-top: 1rem;
+}
+
+.stat {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm);
+}
+
+.stat-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* --- List View Transformer (Desktop Mode overrides) --- */
+@media (min-width: 769px) {
+  .crypto-container.list .crypto-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    gap: 3rem;
+    border-radius: var(--radius-sm); /* Sleeker borders for lists */
+  }
+
+  .crypto-container.list .crypto-header {
+    margin-bottom: 0;
+    flex-shrink: 0;
+    min-width: 220px;
+  }
+
+  .crypto-container.list .crypto-price {
+    margin-bottom: 0;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 2rem;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .crypto-container.list .price {
+    font-size: 1.6rem;
+  }
+
+  .crypto-container.list .crypto-stats {
+    margin-top: 0;
+    display: flex;
+    gap: 3rem;
+    flex-shrink: 0;
+  }
+
+  .crypto-container.list .stat {
+    padding: 0;
+    background: transparent;
+    border: none;
+    text-align: right;
+    min-width: 140px;
+  }
+  
+  .crypto-container.list .stat-label {
+    margin-bottom: 0.15rem;
+  }
+}
+
+/* --- Mobile Responsive Adaptive Layout Rules --- */
+@media (max-width: 768px) {
+  .app {
+    padding: 2rem 1rem;
+  }
+
+  .controlls, .controls {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .price {
+    font-size: 1.85rem;
+  }
+  
+  .crypto-container.grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}

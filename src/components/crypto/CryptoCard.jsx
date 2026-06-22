@@ -27,9 +27,6 @@ export const CryptoCard = ({data}) =>{
                     <span className="stat-label">Market Cap</span>
                     <span className="stat-value">${formatMarketCap(data.market_cap)}</span>
                 </div>
-            </div>
-
-            <div className="crypto-stats">
                 <div className="stat">
                     <span className="stat-label">Volume</span>
                     <span className="stat-value">${formatMarketCap(data.total_volume)}</span>
