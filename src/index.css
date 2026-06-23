@@ -529,6 +529,23 @@ body {
   animation: sp-pulse-bg 1.2s ease-in-out infinite;
 }
 
+
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-ring,
+  .sp-ring-2,
+  .sp-pulse-path,
+  .sp-dots,
+  .sp-glow,
+  .ec-pulse-path,
+  .ec-dot {
+    animation: none !important;
+  }
+}
+
+
+
+
 /* ========================
    Error card
    ======================== */

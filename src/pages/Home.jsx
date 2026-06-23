@@ -63,8 +63,8 @@ export const Home = () => {
     <div className="app">
       <div className="controls">
         <div className="sort-group">
-          <label>Sort By: </label>
-          <select value={sortBy} onChange={(e)=> setSortBy(e.target.value)}>
+          <label htmlFor="sortBy">Sort By: </label>
+          <select id="sortBy" value={sortBy} onChange={(e)=> setSortBy(e.target.value)}>
             <option value="market_cap_rank">Rank</option>
             <option value="name">Name</option>
             <option value="price">Price (Low to High)</option>
