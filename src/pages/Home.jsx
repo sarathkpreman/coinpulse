@@ -1,9 +1,10 @@
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { fetchCoin } from "../api/coingecko";
 import { CryptoCard } from "../components/crypto/CryptoCard";
 import { Spinner } from "../components/ui/Spinner"
 import { ErrorCard } from "../components/ui/ErrorCard"
+import { Logo } from "../components/ui/Logo";
 
 export const Home = () => {
   const [cryptoList, setCryptoList] = useState([]);
@@ -11,6 +12,8 @@ export const Home = () => {
   const [error, setError] = useState(null);
   const [viewMode, setViewMode] = useState("grid")
   const [sortBy, setSortBy] = useState("market_cap_rank")
+  const [query, setQuery] = useState("")
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -51,8 +54,13 @@ export const Home = () => {
           return 0;
       }
     });
-    return list;
-  }, [sortBy, cryptoList]);
+    if(!query.trim()) return list
+    const q = query.trim().toLocaleLowerCase();
+    return list.filter((coin)=> 
+      coin.name?.toLowerCase().includes(q) || 
+      coin.symbol?.toLowerCase().includes(q)
+    );
+  }, [sortBy, cryptoList, query]);
 
 
   if(isLoading) return <div className="page-center"><Spinner /></div>
@@ -61,6 +69,24 @@ export const Home = () => {
 
   return (
     <div className="app">
+<div className="header">
+  <div className="logo-section">
+    <Logo />
+    <h1 className="logo-text">CoinPulse</h1>
+  </div>
+  <div className="search-section">
+    <input
+      ref={inputRef}
+      id="search-input"
+      type="text"
+      className="search-input"
+      placeholder="Search Coins..."
+      value={query}
+      onChange={(e)=> setQuery(e.target.value)}
+      aria-label="Search coins"
+    />
+  </div>
+</div>
       <div className="controls">
         <div className="sort-group">
           <label htmlFor="sortBy">Sort By: </label>

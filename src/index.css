@@ -54,6 +54,69 @@ body {
 }
 
 /* ========================
+   Header
+   ======================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.logo-text {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.search-section {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+}
+
+.search-input {
+  width: 320px;
+  max-width: 100%;
+  height: 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  padding: 0 1.25rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ========================
    Controls bar
    ======================== */
 .controls {
@@ -283,10 +346,6 @@ body {
   margin-top: auto;
 }
 
-.crypto-stats + .crypto-stats {
-  margin-top: 1rem;
-}
-
 .stat {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.01);
@@ -367,9 +426,43 @@ body {
    ======================== */
 @media (max-width: 768px) {
   .app {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 
+  /* Header */
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-section {
+    justify-content: flex-start;
+  }
+
+  .logo-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+
+ .search-section {
+  justify-content: stretch;
+  flex: unset;
+  min-width: 0;
+}
+
+  .search-input {
+    width: 100%;
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  /* Controls */
   .controls {
     flex-direction: column;
     align-items: stretch;
@@ -390,6 +483,7 @@ body {
     justify-content: center;
   }
 
+  /* Cards */
   .price {
     font-size: 1.85rem;
   }
@@ -399,10 +493,7 @@ body {
     gap: 1.25rem;
   }
 
-  .crypto-container.list {
-    gap: 1.25rem;
-  }
-
+  /* List view on mobile — revert to column card layout */
   .crypto-container.list .crypto-card {
     flex-direction: column;
     padding: 1.5rem;
@@ -511,7 +602,10 @@ body {
   justify-content: center;
 }
 
-.sp-pulse-svg { width: 60%; height: 40%; }
+.sp-pulse-svg {
+  width: 60%;
+  height: 40%;
+}
 
 .sp-pulse-path {
   stroke-dasharray: 120;
@@ -519,7 +613,9 @@ body {
   animation: sp-draw 1.2s ease-in-out infinite;
 }
 
-.sp-dots { animation: sp-fade 1.2s ease-in-out infinite; }
+.sp-dots {
+  animation: sp-fade 1.2s ease-in-out infinite;
+}
 
 .sp-glow {
   position: absolute;
@@ -528,23 +624,6 @@ body {
   background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
   animation: sp-pulse-bg 1.2s ease-in-out infinite;
 }
-
-
-
-@media (prefers-reduced-motion: reduce) {
-  .sp-ring,
-  .sp-ring-2,
-  .sp-pulse-path,
-  .sp-dots,
-  .sp-glow,
-  .ec-pulse-path,
-  .ec-dot {
-    animation: none !important;
-  }
-}
-
-
-
 
 /* ========================
    Error card
@@ -575,7 +654,10 @@ body {
   margin-bottom: 4px;
 }
 
-.ec-pulse-svg { width: 22px; height: 14px; }
+.ec-pulse-svg {
+  width: 22px;
+  height: 14px;
+}
 
 .ec-pulse-path {
   stroke-dasharray: 70;
@@ -583,7 +665,9 @@ body {
   animation: ec-draw 2s ease-in-out infinite;
 }
 
-.ec-dot { animation: ec-blink 2s ease-in-out infinite; }
+.ec-dot {
+  animation: ec-blink 2s ease-in-out infinite;
+}
 
 .ec-title {
   font-size: 14px;
@@ -620,11 +704,14 @@ body {
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
   transition: var(--transition);
 }
 
-.ec-btn:hover { opacity: 0.8; }
+.ec-btn:hover {
+  opacity: 0.8;
+}
 
 .ec-btn-ghost {
   background: transparent;
@@ -632,7 +719,11 @@ body {
   border: 1px solid var(--border);
 }
 
-.ec-btn-ghost:hover { border-color: var(--border-hover); color: var(--text); }
+.ec-btn-ghost:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+  opacity: 1;
+}
 
 .ec-btn-primary {
   background: var(--primary);
@@ -641,10 +732,13 @@ body {
   font-weight: 700;
 }
 
-.ec-btn-primary:hover { background: var(--primary-hover); opacity: 1; }
+.ec-btn-primary:hover {
+  background: var(--primary-hover);
+  opacity: 1;
+}
 
 /* ========================
-   Animations (FIX 5: deduplicated — declared once)
+   Animations
    ======================== */
 @keyframes sp-spin {
   to { transform: rotate(360deg); }
@@ -677,4 +771,19 @@ body {
 @keyframes ec-blink {
   0%, 100% { opacity: 0.15; }
   50%       { opacity: 1;    }
+}
+
+/* ========================
+   Reduced motion
+   ======================== */
+@media (prefers-reduced-motion: reduce) {
+  .sp-ring,
+  .sp-ring-2,
+  .sp-pulse-path,
+  .sp-dots,
+  .sp-glow,
+  .ec-pulse-path,
+  .ec-dot {
+    animation: none !important;
+  }
 }
