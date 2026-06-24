@@ -12,6 +12,7 @@ export const Home = () => {
   const [error, setError] = useState(null);
   const [viewMode, setViewMode] = useState("grid")
   const [sortBy, setSortBy] = useState("market_cap_rank")
+  const [query, setQuery] = useState("")
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -53,8 +54,13 @@ export const Home = () => {
           return 0;
       }
     });
-    return list;
-  }, [sortBy, cryptoList]);
+    if(!query.trim()) return list
+    const q = query.trim().toLocaleLowerCase();
+    return list.filter((coin)=> 
+      coin.name?.toLowerCase().includes(q) || 
+      coin.symbol?.toLowerCase().includes(q)
+    );
+  }, [sortBy, cryptoList, query]);
 
 
   if(isLoading) return <div className="page-center"><Spinner /></div>
@@ -75,6 +81,9 @@ export const Home = () => {
       type="text"
       className="search-input"
       placeholder="Search Coins..."
+      value={query}
+      onChange={(e)=> setQuery(e.target.value)}
+      aria-label="Search coins"
     />
   </div>
 </div>
