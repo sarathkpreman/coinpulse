@@ -1,4 +1,4 @@
-const BASE_URL = "/api/v3";
+const BASE_URL = "https://api.coingecko.com/api/v3";
 
 export const fetchCoin = async (signal) => {
     const response = await fetch (
@@ -12,7 +12,6 @@ export const fetchCoin = async (signal) => {
             `CoinGecko request failed (${response.status} ${response.statusText})${body ? `: ${body}` : ""}`
         )
     }
-
     return response.json()
 };
 
@@ -29,7 +28,6 @@ export const fetchCoinData = async (id, signal) => {
             `CoinGecko request failed (${response.status} ${response.statusText})${body ? `: ${body}` : ""}`
         )
     }
-
     return response.json()
 };
 
@@ -46,6 +44,5 @@ export const fetchCoinChartData = async (id, days, signal) => {
             `CoinGecko request failed (${response.status} ${response.statusText})${body ? `: ${body}` : ""}`
         )
     }
-
     return response.json()
 };
