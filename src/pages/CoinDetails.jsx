@@ -60,7 +60,9 @@ if (!coinData) return (
         <div className="stat-card">
           <h3>24h Change</h3>
           <p>
-            {coinData.price_change_percentage_24h.toFixed(2)}
+            {coinData.price_change_percentage_24h != null
+              ? `${coinData.price_change_percentage_24h.toFixed(2)}%`
+              : "N/A"}
             %
           </p>
         </div>

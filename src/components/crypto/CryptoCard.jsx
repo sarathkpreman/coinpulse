@@ -6,7 +6,7 @@ export const CryptoCard = ({data}) =>{
     const navigate = useNavigate()
 
     const handleClick = () => {
-        navigate('/coin/markets/${data.id}', { state: {coin: data} })
+        navigate(`/coin/markets/${data.id}`, { state: { coin: data } })
     }
 
     return (
