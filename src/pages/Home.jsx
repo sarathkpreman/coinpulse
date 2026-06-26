@@ -14,6 +14,7 @@ export const Home = () => {
   const [sortBy, setSortBy] = useState("market_cap_rank")
   const [query, setQuery] = useState("")
   const inputRef = useRef(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,7 +33,7 @@ export const Home = () => {
 
     fetchCoinData();
     return () => controller.abort();
-  }, []);
+  }, [retryCount]);
 
   const filteredList = useMemo(() => {
     const list = [...cryptoList];
@@ -65,7 +66,13 @@ export const Home = () => {
 
   if(isLoading) return <div className="page-center"><Spinner /></div>
 
-  if(error) return <div className="page-center"><ErrorCard /></div>
+  if(error) return <div className="page-center"><ErrorCard 
+    onRetry={()=> {
+      setError(null)
+      setIsLoading(true)
+      setRetryCount(c => c + 1)
+    }}
+  /></div>
 
   return (
     <div className="app">

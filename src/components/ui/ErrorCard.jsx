@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom"
+
 export const ErrorCard = ({
-  title = "Failed to fetch prices",
-  message = "Couldn't retrieve coin data. Check your connection and try again.",
-  errorCode = "ERR_NETWORK",
+  title = "Something went wrong",
+  message = "An unexpected error occurred. Please try again.",
+  errorCode = "ERR_UNKNOWN",
   onRetry,
-  onDismiss,
 }) => {
+
+  const navigate = useNavigate()
+
   return (
     <div className="ec-card">
       <div className="ec-icon">
@@ -27,7 +31,7 @@ export const ErrorCard = ({
       <span className="ec-meta">{errorCode} · coinpulse/api</span>
 
       <div className="ec-actions">
-        <button className="ec-btn ec-btn-ghost" onClick={onDismiss}>Dismiss</button>
+        <button className="ec-btn ec-btn-ghost" onClick={()=> navigate("/")}>Back to Home</button>
         <button className="ec-btn ec-btn-primary" onClick={onRetry}>Retry</button>
       </div>
     </div>

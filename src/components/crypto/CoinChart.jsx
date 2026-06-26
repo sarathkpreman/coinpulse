@@ -43,7 +43,7 @@ export const CoinChart = ({id}) => {
 }, [id]);
 
    if(isLoading) return <ChartSkelton />
-   if(error) return <ErrorCard message="Chart is not available" />
+   if(error) return <div className="page-center"><ErrorCard message="Chart is not available" /></div>
 
     return (
     <ResponsiveContainer width="100%" height={280}>
